@@ -76,9 +76,8 @@ def show_roberta_sentiment_analysis():
     with col1:
         st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
     with col2:
-        # st.title("Content Creator Analytics")
-        st.header("Topics As Aspects - ROBERTA ABSA Sentiment Analysis")
-        # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
+        st.header("ROBERTA ABSA Sentiment Analysis")
+        st.write("Topics As Aspects")
     st.markdown("---")
     
     # Add progress indicator for initial data loading
