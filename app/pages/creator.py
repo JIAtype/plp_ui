@@ -5,12 +5,13 @@ from collections import defaultdict
 import pandas as pd
 import numpy as np
 import altair as alt
+from app.components.topic_analysis import show_topic_analysis
 from app.components.video_analysis import show_video_analysis
 from app.components.overview import show_overview_analysis
 from app.components.spam_analysis import show_spam_analysis
 
 def show_creator_page():
-    st.title("Content Creator Analytics")
+    # st.title("Content Creator Analytics")
     
     # 加载示例数据
     # 实际使用时，应该连接到真实的数据源
@@ -46,9 +47,10 @@ def show_creator_page():
         }
     
     data = load_creator_data()
-    
+
     # 创建侧边栏过滤器
-    st.sidebar.subheader("Content Creator Analytics")
+    st.sidebar.markdown("---")
+    # st.sidebar.subheader("Content Creator Analytics")
     
     # 选择时间范围(模拟)
     # st.sidebar.date_input("Date Range", value=(pd.to_datetime("2023-01-01"), pd.to_datetime("2023-12-31")))
@@ -59,7 +61,7 @@ def show_creator_page():
 
     analysis_type = st.sidebar.radio(
         "Select Analysis",
-        ["Overview","Sentiment Analysis", "Spam Analysis", "Spam Summary"]
+        ["Overview","Sentiment Analysis","Topic Analysis" , "Spam Analysis", "Spam Summary"]
     )
     
     # 根据选择的分析类型显示相应的组件，并传递过滤后的数据
@@ -71,3 +73,5 @@ def show_creator_page():
         show_spam_analysis()
     elif analysis_type == "Spam Summary":
         show_spam_summary(selected_creator)
+    elif analysis_type == "Topic Analysis":
+        show_topic_analysis(selected_creator)
