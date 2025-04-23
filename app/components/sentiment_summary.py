@@ -56,7 +56,7 @@ def show_sentiment_summary():
         ]]
 
         # Display data summary table
-        st.subheader("Overview")
+        st.subheader("Videos and Comments Overview")
         st.dataframe(summary.style.background_gradient(subset=["% Positive", "% Negative", "% Neutral"], cmap="Blues")
                     .format({"% Positive": "{:.2f}%", "% Negative": "{:.2f}%", "% Neutral": "{:.2f}%"}),
                     use_container_width=True)
