@@ -78,7 +78,7 @@ def show_tdidf_roberta_sentiment_analysis():
     with col2:
         st.header("ROBERTA ABSA Sentiment Analysis")
         st.write("TD-IDF Extracted Topics As Aspects")
-    st.markdown("---")
+    # st.markdown("---")
     
     # Add progress indicator for initial data loading
     with st.spinner('Loading sentiment data...'):
