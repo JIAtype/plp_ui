@@ -20,7 +20,7 @@ def show_business_page():
     # 分析类型选择
     analysis_type = st.sidebar.radio(
         "Select Analysis",
-        ["Video Summary","Sentiment Analysis","Topic Analysis","Entity Analysis", "Topics As Aspects - VADER Sentiment Analysis","Topics As Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - VADER Sentiment Analysis","TD-IDF Extracted Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - BART ABSA Sentiment Analysis","Analysis Comparison"]
+        ["Video Summary","Sentiment Analysis","Topic Analysis","Entity Analysis", "VADER Sentiment Analysis","ROBERTA ABSA Sentiment Analysis","TD-IDF VADER Sentiment Analysis","TD-IDF ROBERTA ABSA Sentiment Analysis","TD-IDF BART ABSA Sentiment Analysis","Analysis Comparison"]
     )
     
     # 显示选定的分析
@@ -34,13 +34,13 @@ def show_business_page():
         show_topic_analysis()
     elif analysis_type == "Entity Analysis":
         show_entity_analysis()
-    elif analysis_type == "Topics As Aspects - VADER Sentiment Analysis":
+    elif analysis_type == "VADER Sentiment Analysis":
         show_vader_sentiment_analysis()
-    elif analysis_type == "Topics As Aspects - ROBERTA ABSA Sentiment Analysis":
+    elif analysis_type == "ROBERTA ABSA Sentiment Analysis":
         show_roberta_sentiment_analysis()
-    elif analysis_type == "TD-IDF Extracted Aspects - VADER Sentiment Analysis":
+    elif analysis_type == "TD-IDF VADER Sentiment Analysis":
         show_tdidf_vader_sentiment_analysis()
-    elif analysis_type == "TD-IDF Extracted Aspects - ROBERTA ABSA Sentiment Analysis":
+    elif analysis_type == "TD-IDF ROBERTA ABSA Sentiment Analysis":
         show_tdidf_roberta_sentiment_analysis()
-    elif analysis_type == "TD-IDF Extracted Aspects - BART ABSA Sentiment Analysis":
+    elif analysis_type == "TD-IDF BART ABSA Sentiment Analysis":
         show_tdidf_bart_sentiment_analysis()
