@@ -64,10 +64,10 @@ def show_home():
     
     with col1:
         st.subheader("Content Creator Analytics")
-        st.image("images/Picture1.png", use_column_width=True)
+        st.image("images/Picture1.png", use_container_width=True)
         st.markdown("Gain insights into your content performance and audience sentiment")
     
     with col2:
         st.subheader("Business Intelligence")
-        st.image("images/Picture2.png", use_column_width=True)
+        st.image("images/Picture2.png", use_container_width=True)
         st.markdown("Compare creators and discover trends to inform your marketing strategy") 
