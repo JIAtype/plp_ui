@@ -109,39 +109,39 @@ def show_video_summary():
             #     st.warning("The sentiment models show weak correlation, suggesting they may be detecting different aspects of sentiment.")
         
         # Add time-based analysis
-        if "date" in df.columns:
-            st.subheader("Sentiment Over Time")
+        # if "date" in df.columns:
+        #     st.subheader("Sentiment Over Time")
             
-            # Convert date to datetime and extract month-year
-            df['date'] = pd.to_datetime(df['date'])
-            df['month_year'] = df['date'].dt.strftime('%Y-%m')
+        #     # Convert date to datetime and extract month-year
+        #     df['date'] = pd.to_datetime(df['date'])
+        #     df['month_year'] = df['date'].dt.strftime('%Y-%m')
             
-            # Aggregate by month and channel
-            monthly_sentiment = df.groupby(['month_year', 'channel']).agg({
-                'sentiment_vader': 'mean',
-                'sentiment_roberta': 'mean'
-            }).reset_index()
+        #     # Aggregate by month and channel
+        #     monthly_sentiment = df.groupby(['month_year', 'channel']).agg({
+        #         'sentiment_vader': 'mean',
+        #         'sentiment_roberta': 'mean'
+        #     }).reset_index()
             
-            # Plot time series
-            fig_time = px.line(
-                monthly_sentiment, 
-                x="month_year", 
-                y=["sentiment_vader", "sentiment_roberta"],
-                color="channel",
-                title="Average Sentiment Score Over Time by Channel",
-                labels={
-                    "month_year": "Month", 
-                    "value": "Avg Sentiment Score",
-                    "variable": "Sentiment Model"
-                },
-                markers=True
-            )
-            fig_time.update_layout(
-                xaxis_title="Time Period",
-                yaxis_title="Average Sentiment (Negative → Positive)",
-                legend_title="Channel & Model"
-            )
-            st.plotly_chart(fig_time, use_container_width=True)
+        #     # Plot time series
+        #     fig_time = px.line(
+        #         monthly_sentiment, 
+        #         x="month_year", 
+        #         y=["sentiment_vader", "sentiment_roberta"],
+        #         color="channel",
+        #         title="Average Sentiment Score Over Time by Channel",
+        #         labels={
+        #             "month_year": "Month", 
+        #             "value": "Avg Sentiment Score",
+        #             "variable": "Sentiment Model"
+        #         },
+        #         markers=True
+        #     )
+        #     fig_time.update_layout(
+        #         xaxis_title="Time Period",
+        #         yaxis_title="Average Sentiment (Negative → Positive)",
+        #         legend_title="Channel & Model"
+        #     )
+        #     st.plotly_chart(fig_time, use_container_width=True)
 
     except Exception as e:
         st.error(f"Error processing the sentiment data: {e}")
