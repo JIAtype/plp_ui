@@ -253,7 +253,7 @@ def show_spam_analysis():
                     """, unsafe_allow_html=True)
     
     # Content Tabs
-    st.markdown("---")
+    # st.markdown("---")
     tab1, tab2, tab3 = st.tabs(["History", "Model Information", "Instructions"])
     
     with tab1:
