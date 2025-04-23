@@ -1,57 +1,3 @@
-# import streamlit as st
-# import pandas as pd
-# import numpy as np
-# import altair as alt
-# import plotly.express as px
-# import plotly.graph_objects as go
-# from wordcloud import WordCloud
-# import matplotlib.pyplot as plt
-# import io
-
-# def show_entity_analysis():
-#     st.header("Entity Sentiment Analysis")
-#     df_entity_summary = pd.read_csv('entity_sentiment_summary.csv')
-
-#     st.subheader("Top Entities by Sentiment")
-#     import plotly.express as px
-
-#     top_entities = df_entity_summary.sort_values("Avg_Sentiment", ascending=False).head(10)
-#     fig = px.bar(
-#         top_entities,
-#         x="Entity",
-#         y="Avg_Sentiment",
-#         color="Label",
-#         text="Avg_Sentiment",
-#         title="Top 10 Entities by Average Sentiment"
-#     )
-#     fig.update_traces(texttemplate='%{text:.2f}', textposition='outside')
-#     fig.update_layout(xaxis_tickangle=-45)
-#     fig.show()
-
-#     st.subheader("第二个图")
-#     import seaborn as sns
-
-#     pivot_table = df_entity_summary.pivot_table(
-#         index="Entity", columns="Label", values="Avg_Sentiment"
-#     )
-#     plt.figure(figsize=(12, 8))
-#     sns.heatmap(pivot_table.fillna(0), cmap="coolwarm", annot=False)
-#     plt.title("Heatmap of Average Sentiment per Entity and Label")
-#     plt.show()
-
-#     st.subheader("第三个图")
-#     from wordcloud import WordCloud
-
-#     positive_entities = df_entity_summary[df_entity_summary["Avg_Sentiment"] > 0.2]
-#     text_pos = " ".join(positive_entities["Entity"])
-
-#     wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text_pos)
-#     plt.figure(figsize=(10, 5))
-#     plt.imshow(wordcloud, interpolation="bilinear")
-#     plt.axis("off")
-#     plt.title("Word Cloud of Positive Entities")
-#     plt.show()
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -65,16 +11,23 @@ import seaborn as sns
 from matplotlib.colors import LinearSegmentedColormap
 
 def show_entity_analysis():
-    st.header("Entity Sentiment Analysis")
+    col1, col2 = st.columns([2, 8])
+    with col1:
+        st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
+    with col2:
+        # st.title("Content Creator Analytics")
+        st.header("Entity Sentiment Analysis")
+        # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("---")
     df_entity_summary = pd.read_csv('data/entity_sentiment_summary3.csv')
     
     # 读取数据，添加错误处理
     # try:
         
     # except FileNotFoundError:
-    #     st.error("数据文件 'entity_sentiment_summary.csv' 未找到。请确保文件存在。")
+    #     st.error("Data file 'entity_sentiment_summary.csv' not found. Please make sure the file exists.")
     #     # 为了演示，创建示例数据
-    #     st.info("正在使用示例数据进行演示...")
+    #     st.info("Using sample data for demonstration...")
         
     #     # 创建模拟实体数据
     #     entities = ["Product", "Company", "Service", "Feature", "Support", 
@@ -396,44 +349,44 @@ def show_entity_analysis():
             else:
                 st.write("No negative entities found.")
     
-    # 6. 添加交互式散点图 - 实体频率与情感
-    st.subheader("Entity Frequency vs. Sentiment")
+    # # 6. 添加交互式散点图 - 实体频率与情感
+    # st.subheader("Entity Frequency vs. Sentiment")
     
-    # 检查数据集中是否有Frequency列
-    if "Frequency" in df_entity_summary.columns:
-        # 按标签分组计算实体频率和平均情感
-        entity_agg = df_entity_summary.groupby(["Entity", "Label"]).agg({
-            "Avg_Sentiment": "mean",
-            "Frequency": "sum"  # 确保聚合Frequency
-        }).reset_index()
+    # # 检查数据集中是否有Frequency列
+    # if "Frequency" in df_entity_summary.columns:
+    #     # 按标签分组计算实体频率和平均情感
+    #     entity_agg = df_entity_summary.groupby(["Entity", "Label"]).agg({
+    #         "Avg_Sentiment": "mean",
+    #         "Frequency": "sum"  # 确保聚合Frequency
+    #     }).reset_index()
         
-        # 创建散点图
-        fig = px.scatter(
-            entity_agg,
-            x="Frequency",
-            y="Avg_Sentiment",
-            color="Label",
-            hover_name="Entity",
-            text="Entity",
-            title="Entity Frequency vs. Sentiment Score",
-            color_discrete_sequence=px.colors.qualitative.Pastel,
-            labels={
-                "Frequency": "Mention Frequency",
-                "Avg_Sentiment": "Average Sentiment Score (-1 to 1)"
-            }
-        )
+    #     # 创建散点图
+    #     fig = px.scatter(
+    #         entity_agg,
+    #         x="Frequency",
+    #         y="Avg_Sentiment",
+    #         color="Label",
+    #         hover_name="Entity",
+    #         text="Entity",
+    #         title="Entity Frequency vs. Sentiment Score",
+    #         color_discrete_sequence=px.colors.qualitative.Pastel,
+    #         labels={
+    #             "Frequency": "Mention Frequency",
+    #             "Avg_Sentiment": "Average Sentiment Score (-1 to 1)"
+    #         }
+    #     )
         
-        # 仅对频率较高的实体显示标签
-        fig.update_traces(
-            textposition='top center',
-            textfont_size=10,
-            mode=lambda d: 'markers+text' if d.get('x', 0) > np.percentile(entity_agg["Frequency"], 75) else 'markers'
-        )
+    #     # 仅对频率较高的实体显示标签
+    #     fig.update_traces(
+    #         textposition='top center',
+    #         textfont_size=10,
+    #         mode=lambda d: 'markers+text' if d.get('x', 0) > np.percentile(entity_agg["Frequency"], 75) else 'markers'
+    #     )
         
-        fig.update_layout(height=600)
-        st.plotly_chart(fig, use_container_width=True)
-    else:
-        st.warning("无法创建频率vs情感散点图：数据集中缺少'Frequency'列")
+    #     fig.update_layout(height=600)
+    #     st.plotly_chart(fig, use_container_width=True)
+    # else:
+    #     st.warning("无法创建频率vs情感散点图：数据集中缺少'Frequency'列")
     
     # 7. 下载数据按钮
     st.subheader("Download Entity Analysis Data")
