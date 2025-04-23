@@ -669,9 +669,17 @@ def show_vader_sentiment_analysis():
         Greener cells indicate more positive sentiment, while redder cells indicate more negative sentiment.
         """)
         
+        # Assuming creator_aspect_sentiment is your data
+        # First, let's make sure we use the proper labels for axes
+        # Extract unique creators and aspects from your data
+        creators = ["Fully Charged Show", "Bjorn Nyland", "Electric Vehicle Man", "Now You Know", "E for Electric"]
+        aspects = ["battery", "tesla", "range", "charging", "charger", "suv", "network", "rivian", "electrify america", "capacity"]
+        
         fig = px.imshow(
             creator_aspect_sentiment,
             labels=dict(x="Aspect", y="Creator", color="Sentiment Score"),
+            x=aspects,  # Use aspect names for x-axis
+            y=creators,  # Use creator names for y-axis
             color_continuous_scale="RdYlGn",
             aspect="auto"
         )
@@ -692,6 +700,9 @@ def show_vader_sentiment_analysis():
         fig.update_traces(
             hovertemplate="<b>Creator:</b> %{y}<br><b>Aspect:</b> %{x}<br><b>Sentiment Score:</b> %{z:.2f}<extra></extra>"
         )
+        
+        # Remove the empty cell in the first row and column
+        # If you need to hide specific cells, you can set their values to None or use a mask
         
         st.plotly_chart(fig, use_container_width=True)
 
