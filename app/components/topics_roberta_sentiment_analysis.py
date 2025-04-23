@@ -78,7 +78,7 @@ def show_roberta_sentiment_analysis():
     with st.spinner('Loading sentiment data...'):
         # Load all necessary datasets at the beginning
         sentiment_counts_vader = load_data('data/roberta_sentiment_counts.csv')
-        sentiment_counts_vader = sentiment_counts_vader.set_index('sentiment_roberta').astype(int).transpose()
+        sentiment_counts_vader = sentiment_counts_vader.set_index('channel').astype(int).transpose()
         
         comments_per_creator_sentiment = load_data("data/comments_per_creator_sentiment_roberta.csv")
         topic_sentiment_df = load_data('data/topic_sentiment_summary_roberta.csv')
