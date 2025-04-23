@@ -40,12 +40,12 @@ def show_creator_comparison():
     
     # 在第一列显示第一个分析
     with display_col1:
-        st.subheader(analysis_type_1)
+        # st.subheader(analysis_type_1)
         display_analysis(analysis_type_1)
     
     # 在第二列显示第二个分析
     with display_col2:
-        st.subheader(analysis_type_2)
+        # st.subheader(analysis_type_2)
         display_analysis(analysis_type_2)
 
 # 辅助函数，用于根据分析类型显示相应的组件
