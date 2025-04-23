@@ -111,27 +111,27 @@ def show_roberta_sentiment_analysis():
         st.subheader("Overall Sentiment Distribution per Creator")
         
         # 添加每个主题的情感分布条形图
-        st.subheader("情感分布 (按主题)")
+        st.subheader("Sentiment distribution by topic")
         topic_sentiment = load_data("data/absa_results_roberta.csv")
         topic_sentiment = topic_sentiment.sort_values(by=["Positive", "Negative", "Neutral"], ascending=False)
         topic_sentiment_melted = topic_sentiment.melt(
             id_vars="Topics", 
             value_vars=["Positive", "Negative", "Neutral"],
-            var_name="情感", 
-            value_name="数量"
+            var_name="Sentiment", 
+            value_name="Count"
         )
         fig = px.bar(
             topic_sentiment_melted, 
             x="Topics", 
-            y="数量", 
-            color="情感",
-            title="每个主题的情感分布",
-            labels={"Topics": "主题"},
+            y="Count", 
+            color="Sentiment",
+            title="Sentiment distribution of each topic",
+            labels={"Topics": "Topic"},
             color_discrete_map=sentiment_colors
         )
         fig.update_layout(
             xaxis_tickangle=-45,
-            legend_title="情感类别",
+            legend_title="Sentiment Type",
             hoverlabel=dict(
                 bgcolor="white",
                 font_size=12,
@@ -139,14 +139,14 @@ def show_roberta_sentiment_analysis():
             )
         )
         fig.update_traces(
-            hovertemplate="<b>主题:</b> %{x}<br><b>%{data.name}:</b> %{y}<extra></extra>"
+            hovertemplate="<b>Topic:</b> %{x}<br><b>%{data.name}:</b> %{y}<extra></extra>"
         )
         st.plotly_chart(fig, use_container_width=True)
         st.markdown(
             get_download_link(
                 topic_sentiment,
                 "topic_sentiment_distribution.csv",
-                "📥 下载主题情感数据 (CSV格式)"
+                "📥 Download this data as CSV"
             ),
             unsafe_allow_html=True
         )
