@@ -675,13 +675,17 @@ def show_vader_sentiment_analysis():
         Greener cells indicate more positive sentiment, while redder cells indicate more negative sentiment.
         """)
         
+        # Assuming creator_aspect_sentiment is a DataFrame with creators as rows and aspects as columns
         fig = px.imshow(
             creator_aspect_sentiment,
             labels=dict(x="Aspect", y="Creator", color="Sentiment Score"),
             color_continuous_scale="RdYlGn",
-            aspect="auto"
+            aspect="auto",
+            x=creator_aspect_sentiment.columns,  # Use actual aspect names for x-axis
+            y=creator_aspect_sentiment.index,    # Use actual creator names for y-axis
         )
         
+        # Rest of your code remains the same
         fig.update_layout(
             title="Aspect-Based Sentiment Comparison across Creators",
             xaxis_title="Aspect",
@@ -694,13 +698,23 @@ def show_vader_sentiment_analysis():
             )
         )
         
+        # If you want to ensure all x-axis labels are visible
+        fig.update_layout(
+            xaxis=dict(
+                tickmode='array',
+                tickvals=list(range(len(creator_aspect_sentiment.columns))),
+                ticktext=creator_aspect_sentiment.columns,
+                tickangle=45  # Rotate labels if needed for better readability
+            )
+        )
+        
         # Improve hover information
         fig.update_traces(
             hovertemplate="<b>Creator:</b> %{y}<br><b>Aspect:</b> %{x}<br><b>Sentiment Score:</b> %{z:.2f}<extra></extra>"
         )
         
         st.plotly_chart(fig, use_container_width=True)
-
+        
         # Creator-specific aspect analysis
         st.subheader("Creator-Specific Aspect Analysis")
         
