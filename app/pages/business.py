@@ -20,7 +20,7 @@ def show_business_page():
     # 分析类型选择
     analysis_type = st.sidebar.radio(
         "Select Analysis",
-        ["Video Summary","Analysis Comparison","Sentiment Analysis","Topic Analysis","Entity Analysis", "Topics As Aspects - VADER Sentiment Analysis","Topics As Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - VADER Sentiment Analysis","TD-IDF Extracted Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - BART ABSA Sentiment Analysis"]
+        ["Video Summary","Sentiment Analysis","Topic Analysis","Entity Analysis", "Topics As Aspects - VADER Sentiment Analysis","Topics As Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - VADER Sentiment Analysis","TD-IDF Extracted Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - BART ABSA Sentiment Analysis","Analysis Comparison"]
     )
     
     # 显示选定的分析
