@@ -9,6 +9,7 @@ from app.components.topic_analysis import show_topic_analysis
 from app.components.video_analysis import show_video_analysis
 from app.components.overview import show_overview_analysis
 from app.components.spam_analysis import show_spam_analysis
+from app.components.entity_analysis import show_entity_analysis
 
 def show_creator_page():
     # st.title("Content Creator Analytics")
@@ -61,7 +62,7 @@ def show_creator_page():
 
     analysis_type = st.sidebar.radio(
         "Select Analysis",
-        ["Overview","Sentiment Analysis","Topic Analysis" , "Spam Analysis", "Spam Summary"]
+        ["Overview","Sentiment Analysis","Topic Analysis","Entity Analysis" , "Spam Analysis", "Spam Summary"]
     )
     
     # 根据选择的分析类型显示相应的组件，并传递过滤后的数据
@@ -75,3 +76,5 @@ def show_creator_page():
         show_spam_summary(selected_creator)
     elif analysis_type == "Topic Analysis":
         show_topic_analysis(selected_creator)
+    elif analysis_type == "Entity Analysis":
+        show_entity_analysis()
