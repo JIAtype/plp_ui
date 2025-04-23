@@ -135,7 +135,7 @@ def show_spam_analysis():
     with col1:
         st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
     with col2:
-        st.title("YouTube Comment Spam Detector")
+        st.header("Spam Comments Detector")
         st.write("Analyze YouTube comments to detect spam using multiple machine learning models")
     
     # Main Interface
