@@ -11,11 +11,11 @@ def show_home():
     """)
 
     # st.title("Content Analysis Dashboard")
-    col1, col2 = st.columns([1, 5])
+    col1, col2 = st.columns([1, 6])
     with col1:
         st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
     with col2:
-        st.title("INSIGHTX  Video Comments Analysis")
+        st.title("INSIGHTX     Video Comments Analysis")
         st.write("Analyze social media comments, revealing audience sentiment, popular topics, and engagement trends to inform content strategies and influencer marketing decisions using multiple AI models.")
         # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
     st.markdown("---")
