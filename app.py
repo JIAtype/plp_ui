@@ -25,7 +25,7 @@ def set_custom_styles():
             background-color: #f0f2f6;
             padding: 0.5rem;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.5rem;
             color: #424242;
             border-top: 1px solid #ddd;
         }
@@ -87,21 +87,6 @@ def main():
             if value == selected:
                 st.session_state.user_type = key
                 break
-        
-        st.markdown("---")
-        st.markdown("### About")
-        st.info("""
-        This dashboard helps analyze YouTube 
-        comments sentiment and trends to gain 
-        actionable insights.
-        """)
-    
-    # 显示主标题
-    col1, col2 = st.columns([1, 10])
-    with col1:
-        st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
-    with col2:
-        st.markdown("<h1 class='main-header'>YouTube Comments Analysis</h1>", unsafe_allow_html=True)
     
     # 根据用户类型显示相应页面
     with st.spinner(f"Loading {st.session_state.user_type} dashboard..."):
@@ -116,7 +101,7 @@ def main():
     st.markdown(
         """
         <div class="footer">
-            © 2025 INSIGHTX YouTube Sentiment Analysis Dashboard | All Rights Reserved
+            © 2025 INSIGHTX Video Comments Analysis | All Rights Reserved
         </div>
         """, 
         unsafe_allow_html=True
