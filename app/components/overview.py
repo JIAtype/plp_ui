@@ -7,7 +7,15 @@ import json
 from collections import defaultdict
 
 def show_overview_analysis(selected_creator):
-    st.header("Overview")
+    col1, col2 = st.columns([2, 8])
+    with col1:
+        st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
+    with col2:
+        # st.title("Content Creator Analytics")
+        st.header("Video-Level Overview")
+        # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("---")
+    
     try:
         with open('data/data.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -119,27 +127,6 @@ def show_overview_analysis(selected_creator):
                 height=500
             )
             st.altair_chart(video_chart_topics, use_container_width=True)
-
-            # # 转换数据格式以便于绘制分组柱状图
-            # top_videos = creator_df.sort_values("Number of Comments", ascending=False).head(10)
-            # chart_data = pd.melt(
-            #     top_videos, 
-            #     id_vars=['Video ID'], 
-            #     value_vars=['Number of Comments', 'Number of Topics'],
-            #     var_name='Metric', 
-            #     value_name='Count'
-            # )
-
-            # # 创建分组柱状图
-            # grouped_chart = alt.Chart(chart_data).mark_bar().encode(
-            #     x=alt.X('Video ID:N', axis=alt.Axis(labelAngle=-45)),
-            #     y='Count:Q',
-            #     color='Metric:N',
-            #     column=alt.Column('Metric:N', title=None)
-            # ).properties(
-            #     height=400
-            # )
-            # st.altair_chart(grouped_chart, use_container_width=True)
 
         else:
             st.warning(f"No data available for {selected_creator}")
