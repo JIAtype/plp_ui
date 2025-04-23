@@ -705,7 +705,7 @@ def show_vader_sentiment_analysis():
         )
 
         # Video search functionality
-        video_search = st.text_input("Search for specific video ID (optional):")
+        # video_search = st.text_input("Search for specific video ID (optional):")
         
         # Filter the dataframe based on creator and search
         creator_data = aspect_video_df[aspect_video_df["channel"] == selected_creator]
@@ -1051,193 +1051,193 @@ def show_vader_sentiment_analysis():
 
 # Add search functionality
 # def show_video_search():
-    st.header("Video Search")
+    # st.header("Video Search")
     
-    # Load data
-    with st.spinner('Loading video data...'):
-        try:
-            video_df = load_data("data/comment_sentiment_roberta_and_vader.csv")
+    # # Load data
+    # with st.spinner('Loading video data...'):
+    #     try:
+    #         video_df = load_data("data/comment_sentiment_roberta_and_vader.csv")
             
-            # Get unique videos with creator info
-            unique_videos = video_df[['video_id', 'channel']].drop_duplicates()
-        except Exception as e:
-            st.error(f"Error loading video data: {e}")
-            return
+    #         # Get unique videos with creator info
+    #         unique_videos = video_df[['video_id', 'channel']].drop_duplicates()
+    #     except Exception as e:
+    #         st.error(f"Error loading video data: {e}")
+    #         return
     
-    # Create search box
-    search_query = st.text_input("Search for videos by ID, channel, or keywords in comments:")
+    # # Create search box
+    # search_query = st.text_input("Search for videos by ID, channel, or keywords in comments:")
     
-    if search_query:
-        # Filter videos based on search query
-        filtered_videos = video_df[
-            video_df['video_id'].str.contains(search_query, case=False) |
-            video_df['channel'].str.contains(search_query, case=False) |
-            video_df['comment_text'].str.contains(search_query, case=False)
-        ]
+    # if search_query:
+    #     # Filter videos based on search query
+    #     filtered_videos = video_df[
+    #         video_df['video_id'].str.contains(search_query, case=False) |
+    #         video_df['channel'].str.contains(search_query, case=False) |
+    #         video_df['comment_text'].str.contains(search_query, case=False)
+    #     ]
         
-        # Get unique videos from filtered results
-        search_results = filtered_videos[['video_id', 'channel']].drop_duplicates()
+    #     # Get unique videos from filtered results
+    #     search_results = filtered_videos[['video_id', 'channel']].drop_duplicates()
         
-        if not search_results.empty:
-            st.write(f"Found {len(search_results)} videos matching your search:")
+    #     if not search_results.empty:
+    #         st.write(f"Found {len(search_results)} videos matching your search:")
             
-            # Display results
-            st.dataframe(search_results, height=200)
+    #         # Display results
+    #         st.dataframe(search_results, height=200)
             
-            # Select video for detailed analysis
-            selected_video = st.selectbox(
-                "Select a video for detailed analysis:",
-                options=search_results['video_id'].tolist()
-            )
+    #         # Select video for detailed analysis
+    #         selected_video = st.selectbox(
+    #             "Select a video for detailed analysis:",
+    #             options=search_results['video_id'].tolist()
+    #         )
             
-            if selected_video:
-                # Get video details
-                video_data = filtered_videos[filtered_videos['video_id'] == selected_video]
-                channel = video_data['channel'].iloc[0]
+    #         if selected_video:
+    #             # Get video details
+    #             video_data = filtered_videos[filtered_videos['video_id'] == selected_video]
+    #             channel = video_data['channel'].iloc[0]
                 
-                st.subheader(f"Analysis for Video: {selected_video} ({channel})")
+    #             st.subheader(f"Analysis for Video: {selected_video} ({channel})")
                 
-                # Sentiment distribution for this video
-                sentiment_counts = video_data['sentiment_vader'].value_counts()
+    #             # Sentiment distribution for this video
+    #             sentiment_counts = video_data['sentiment_vader'].value_counts()
                 
-                # Create pie chart
-                fig = px.pie(
-                    values=sentiment_counts.values,
-                    names=sentiment_counts.index,
-                    title=f"Sentiment Distribution for Video {selected_video}",
-                    color_discrete_map={"positive": "#2ca02c", "neutral": "#1f77b4", "negative": "#d62728"}
-                )
+    #             # Create pie chart
+    #             fig = px.pie(
+    #                 values=sentiment_counts.values,
+    #                 names=sentiment_counts.index,
+    #                 title=f"Sentiment Distribution for Video {selected_video}",
+    #                 color_discrete_map={"positive": "#2ca02c", "neutral": "#1f77b4", "negative": "#d62728"}
+    #             )
                 
-                # Improve hover information
-                fig.update_traces(
-                    hovertemplate="<b>%{label}</b><br>Count: %{value}<br>Percentage: %{percent}<extra></extra>"
-                )
+    #             # Improve hover information
+    #             fig.update_traces(
+    #                 hovertemplate="<b>%{label}</b><br>Count: %{value}<br>Percentage: %{percent}<extra></extra>"
+    #             )
                 
-                st.plotly_chart(fig, use_container_width=True)
+    #             st.plotly_chart(fig, use_container_width=True)
                 
-                # Process topics
-                if isinstance(video_data['topics'].iloc[0], str):
-                    video_data['topics'] = video_data['topics'].apply(eval)
+    #             # Process topics
+    #             if isinstance(video_data['topics'].iloc[0], str):
+    #                 video_data['topics'] = video_data['topics'].apply(eval)
                 
-                # Explode topics
-                video_topics = video_data.explode('topics')
+    #             # Explode topics
+    #             video_topics = video_data.explode('topics')
                 
-                # Topic distribution
-                topic_counts = video_topics.groupby('topics').size().sort_values(ascending=False)
+    #             # Topic distribution
+    #             topic_counts = video_topics.groupby('topics').size().sort_values(ascending=False)
                 
-                st.subheader("Topics in this Video")
+    #             st.subheader("Topics in this Video")
                 
-                # Create horizontal bar chart for topics
-                fig = px.bar(
-                    x=topic_counts.values,
-                    y=topic_counts.index,
-                    orientation='h',
-                    title=f"Topic Distribution for Video {selected_video}",
-                    labels={'x': 'Number of Comments', 'y': 'Topic'}
-                )
+    #             # Create horizontal bar chart for topics
+    #             fig = px.bar(
+    #                 x=topic_counts.values,
+    #                 y=topic_counts.index,
+    #                 orientation='h',
+    #                 title=f"Topic Distribution for Video {selected_video}",
+    #                 labels={'x': 'Number of Comments', 'y': 'Topic'}
+    #             )
                 
-                fig.update_layout(
-                    yaxis={'categoryorder': 'total ascending'},
-                    hoverlabel=dict(
-                        bgcolor="white",
-                        font_size=12,
-                        font_family="Arial"
-                    )
-                )
+    #             fig.update_layout(
+    #                 yaxis={'categoryorder': 'total ascending'},
+    #                 hoverlabel=dict(
+    #                     bgcolor="white",
+    #                     font_size=12,
+    #                     font_family="Arial"
+    #                 )
+    #             )
                 
-                # Improve hover information
-                fig.update_traces(
-                    hovertemplate="<b>%{y}</b><br>Comments: %{x}<extra></extra>"
-                )
+    #             # Improve hover information
+    #             fig.update_traces(
+    #                 hovertemplate="<b>%{y}</b><br>Comments: %{x}<extra></extra>"
+    #             )
                 
-                st.plotly_chart(fig, use_container_width=True)
+    #             st.plotly_chart(fig, use_container_width=True)
                 
-                # Topic sentiment distribution
-                st.subheader("Topic Sentiment Distribution")
+    #             # Topic sentiment distribution
+    #             st.subheader("Topic Sentiment Distribution")
                 
-                topic_sentiment = video_topics.groupby(['topics', 'sentiment_vader']).size().reset_index(name='count')
+    #             topic_sentiment = video_topics.groupby(['topics', 'sentiment_vader']).size().reset_index(name='count')
                 
-                # Create pivot table
-                pivot = topic_sentiment.pivot(index='topics', columns='sentiment_vader', values='count').fillna(0)
+    #             # Create pivot table
+    #             pivot = topic_sentiment.pivot(index='topics', columns='sentiment_vader', values='count').fillna(0)
                 
-                # Ensure all sentiment columns exist
-                for col in ['positive', 'neutral', 'negative']:
-                    if col not in pivot.columns:
-                        pivot[col] = 0
+    #             # Ensure all sentiment columns exist
+    #             for col in ['positive', 'neutral', 'negative']:
+    #                 if col not in pivot.columns:
+    #                     pivot[col] = 0
                 
-                # Calculate total and sort
-                pivot['total'] = pivot.sum(axis=1)
-                pivot = pivot.sort_values('total', ascending=False).head(10)
-                pivot = pivot.drop('total', axis=1)
+    #             # Calculate total and sort
+    #             pivot['total'] = pivot.sum(axis=1)
+    #             pivot = pivot.sort_values('total', ascending=False).head(10)
+    #             pivot = pivot.drop('total', axis=1)
                 
-                # Create stacked bar chart
-                topic_sentiment_data = pivot.reset_index().melt(
-                    id_vars='topics',
-                    value_vars=['positive', 'neutral', 'negative'],
-                    var_name='sentiment',
-                    value_name='count'
-                )
+    #             # Create stacked bar chart
+    #             topic_sentiment_data = pivot.reset_index().melt(
+    #                 id_vars='topics',
+    #                 value_vars=['positive', 'neutral', 'negative'],
+    #                 var_name='sentiment',
+    #                 value_name='count'
+    #             )
                 
-                fig = px.bar(
-                    topic_sentiment_data,
-                    x='topics',
-                    y='count',
-                    color='sentiment',
-                    title=f"Topic Sentiment Distribution for Top 10 Topics",
-                    labels={'topics': 'Topic', 'count': 'Number of Comments', 'sentiment': 'Sentiment'},
-                    color_discrete_map={"positive": "#2ca02c", "neutral": "#1f77b4", "negative": "#d62728"}
-                )
+    #             fig = px.bar(
+    #                 topic_sentiment_data,
+    #                 x='topics',
+    #                 y='count',
+    #                 color='sentiment',
+    #                 title=f"Topic Sentiment Distribution for Top 10 Topics",
+    #                 labels={'topics': 'Topic', 'count': 'Number of Comments', 'sentiment': 'Sentiment'},
+    #                 color_discrete_map={"positive": "#2ca02c", "neutral": "#1f77b4", "negative": "#d62728"}
+    #             )
                 
-                fig.update_layout(
-                    xaxis_tickangle=-45,
-                    barmode='stack',
-                    hoverlabel=dict(
-                        bgcolor="white",
-                        font_size=12,
-                        font_family="Arial"
-                    )
-                )
+    #             fig.update_layout(
+    #                 xaxis_tickangle=-45,
+    #                 barmode='stack',
+    #                 hoverlabel=dict(
+    #                     bgcolor="white",
+    #                     font_size=12,
+    #                     font_family="Arial"
+    #                 )
+    #             )
                 
-                # Improve hover information
-                fig.update_traces(
-                    hovertemplate="<b>Topic:</b> %{x}<br><b>%{data.name}:</b> %{y}<extra></extra>"
-                )
+    #             # Improve hover information
+    #             fig.update_traces(
+    #                 hovertemplate="<b>Topic:</b> %{x}<br><b>%{data.name}:</b> %{y}<extra></extra>"
+    #             )
                 
-                st.plotly_chart(fig, use_container_width=True)
+    #             st.plotly_chart(fig, use_container_width=True)
                 
-                # Display sample comments
-                st.subheader("Sample Comments")
+    #             # Display sample comments
+    #             st.subheader("Sample Comments")
                 
-                # Add sentiment filter
-                sentiment_filter = st.radio(
-                    "Filter comments by sentiment:",
-                    ['All', 'Positive', 'Neutral', 'Negative'],
-                    horizontal=True
-                )
+    #             # Add sentiment filter
+    #             sentiment_filter = st.radio(
+    #                 "Filter comments by sentiment:",
+    #                 ['All', 'Positive', 'Neutral', 'Negative'],
+    #                 horizontal=True
+    #             )
                 
-                # Apply filter
-                if sentiment_filter != 'All':
-                    filtered_comments = video_data[video_data['sentiment_vader'] == sentiment_filter.lower()]
-                else:
-                    filtered_comments = video_data
+    #             # Apply filter
+    #             if sentiment_filter != 'All':
+    #                 filtered_comments = video_data[video_data['sentiment_vader'] == sentiment_filter.lower()]
+    #             else:
+    #                 filtered_comments = video_data
                 
-                # Display comments
-                st.dataframe(
-                    filtered_comments[['timestamp', 'sentiment_vader', 'comment_text']].head(20),
-                    height=400
-                )
+    #             # Display comments
+    #             st.dataframe(
+    #                 filtered_comments[['timestamp', 'sentiment_vader', 'comment_text']].head(20),
+    #                 height=400
+    #             )
                 
-                # Add download option for comments
-                st.markdown(
-                    get_download_link(
-                        filtered_comments[['timestamp', 'sentiment_vader', 'comment_text']],
-                        f"{selected_video}_comments.csv",
-                        "📥 Download all comments for this video as CSV"
-                    ),
-                    unsafe_allow_html=True
-                )
-        else:
-            st.warning("No videos found matching your search criteria.")
+    #             # Add download option for comments
+    #             st.markdown(
+    #                 get_download_link(
+    #                     filtered_comments[['timestamp', 'sentiment_vader', 'comment_text']],
+    #                     f"{selected_video}_comments.csv",
+    #                     "📥 Download all comments for this video as CSV"
+    #                 ),
+    #                 unsafe_allow_html=True
+    #             )
+    #     else:
+    #         st.warning("No videos found matching your search criteria.")
 
 # # Main dashboard with navigation
 # def main():
