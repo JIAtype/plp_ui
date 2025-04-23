@@ -1,58 +1,3 @@
-# import streamlit as st
-# import pandas as pd
-# import numpy as np
-# import altair as alt
-# import plotly.express as px
-# import plotly.graph_objects as go
-
-# def show_topic_analysis():
-
-#     st.header("Positive Sentiment Topic Analysis")
-    
-#     st.subheader("Topic Sentiment Overview")
-
-#     topic_sentiment_df = pd.read_csv('data/topic_sentiment_summary.csv')
-
-#     fig = px.bar(
-#         topic_sentiment_df.head(20),
-#         x="Topic",
-#         y="% Positive",
-#         title="Top 20 Topics by Positive Sentiment (%)",
-#         labels={"% Positive": "Positive Sentiment (%)"},
-#         color="% Positive",
-#         color_continuous_scale="Blues"
-#     )
-#     fig.update_layout(xaxis_tickangle=-45)
-#     fig.show()
-
-#     st.subheader("第二个图")
-#     import plotly.express as px
-
-#     # Melt the DataFrame to long format for grouped bar plotting
-#     melted_df = topic_sentiment_df.melt(
-#         id_vars=["Topic", "Total Mentions"],
-#         value_vars=["Positive", "Negative", "Neutral"],
-#         var_name="Sentiment",
-#         value_name="Count"
-#     )
-
-#     # Optional: Filter to top N topics by mentions
-#     top_topics = melted_df["Topic"].value_counts().index[:20]
-#     melted_df = melted_df[melted_df["Topic"].isin(top_topics)]
-
-#     # Plot grouped bar chart
-#     fig = px.bar(
-#         melted_df,
-#         x="Topic",
-#         y="Count",
-#         color="Sentiment",
-#         barmode="group",
-#         title="Sentiment Breakdown per Topic",
-#         labels={"Count": "Number of Comments"}
-#     )
-#     fig.update_layout(xaxis_tickangle=-45)
-#     fig.show()
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -60,11 +5,61 @@ import altair as alt
 import plotly.express as px
 import plotly.graph_objects as go
 
-def show_topic_analysis():
-    st.header("Positive Sentiment Topic Analysis")
+def show_topic_analysis(selected_creator=None):
+    col1, col2 = st.columns([2, 8])
+    with col1:
+        st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
+    with col2:
+        # st.title("Content Creator Analytics")
+        st.header("Positive Sentiment Topic Analysis")
+        # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("---")
+    # st.header("Positive Sentiment Topic Analysis")
     topic_sentiment_df = pd.read_csv('data/topic_sentiment_summary.csv')
     
+    if selected_creator:
+        videos_data = pd.read_csv('data/video_sentiment_summary.csv')
+        df_sentiment = videos_data[videos_data["Content Creator"] == selected_creator]
+        if len(df_sentiment) == 0:
+            st.warning(f"No data found for creator: {selected_creator}")
+            return
+        st.subheader(f"Topic Analysis for ⭐{selected_creator}⭐")
         
+        # 提取所有话题并计算频率
+        all_topics = []
+        for topics_str in df_sentiment['Topics'].dropna():
+            if isinstance(topics_str, str):
+                # 假设话题是以某种方式分隔的，例如逗号
+                topics = [t.strip() for t in topics_str.split(',')]
+                all_topics.extend(topics)
+        
+        if all_topics:
+            topic_counts = pd.Series(all_topics).value_counts().reset_index()
+            topic_counts.columns = ['Topic', 'Count']
+            
+            # 显示前15个最常见话题
+            top_topics = topic_counts.head(15)
+            
+            fig_topics = px.bar(
+                top_topics, 
+                x='Topic', 
+                y='Count',
+                title=f'Top 15 Topics for {selected_creator}',
+                color='Count',
+                color_continuous_scale='Blues'
+            )
+            
+            fig_topics.update_layout(
+                xaxis={'categoryorder':'total descending', 'tickangle': -45},
+                yaxis_title='Frequency',
+                margin=dict(l=50, r=50, t=80, b=100),
+                height=500
+            )
+            
+            st.plotly_chart(fig_topics, use_container_width=True)
+        else:
+            st.info("No topic data available for analysis")
+    
     # 计算总提及次数和百分比
     topic_sentiment_df["Total Mentions"] = (
         topic_sentiment_df["Positive"] + 
@@ -187,46 +182,6 @@ def show_topic_analysis():
         legend_title="Sentiment Type",
         xaxis_title="Topic",
         yaxis_title="Percentage (%)"
-    )
-    
-    # Streamlit中正确显示plotly图表
-    st.plotly_chart(fig, use_container_width=True)
-    
-    # 添加散点图，展示话题热度与正面情感的关系
-    st.subheader("Topic Popularity vs. Positive Sentiment")
-    
-    fig = px.scatter(
-        topic_sentiment_df,
-        x="Total Mentions",
-        y="% Positive",
-        size="Total Mentions",  # 气泡大小表示总提及量
-        color="% Positive",     # 颜色表示正面情感百分比
-        hover_name="Topic",     # 悬停时显示话题名称
-        text="Topic",           # 在图上标注话题名称
-        color_continuous_scale="Blues",
-        title="Topic Popularity vs. Positive Sentiment",
-        labels={
-            "Total Mentions": "Total Mentions (Popularity)",
-            "% Positive": "Positive Sentiment (%)"
-        }
-    )
-    
-    # 只显示部分标签，避免重叠
-    top_mentions = topic_sentiment_df.nlargest(5, "Total Mentions")["Topic"].tolist()
-    top_positive = topic_sentiment_df.nlargest(5, "% Positive")["Topic"].tolist()
-    topics_to_show = list(set(top_mentions + top_positive))
-    
-    fig.update_traces(
-        textposition='top center',
-        textfont_size=10,
-        marker=dict(opacity=0.7),
-        # 只为特定点显示文本
-        mode=lambda d: 'markers+text' if d.get('hovertext') in topics_to_show else 'markers'
-    )
-    
-    fig.update_layout(
-        height=600,
-        showlegend=False
     )
     
     # Streamlit中正确显示plotly图表
