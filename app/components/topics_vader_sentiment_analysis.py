@@ -78,7 +78,7 @@ def show_vader_sentiment_analysis():
     with col2:
         st.header("VADER Sentiment Analysis")
         st.write("Topics As Aspects")
-    st.markdown("---")
+    # st.markdown("---")
     
     # Add progress indicator for initial data loading
     with st.spinner('Loading sentiment data...'):
