@@ -72,7 +72,14 @@ def create_stacked_bar(data, x_col, y_cols, title, x_label, y_label, legend_titl
     return fig
 
 def show_roberta_sentiment_analysis():
-    st.header("Video-Level Sentiment Analysis")
+    col1, col2 = st.columns([2, 8])
+    with col1:
+        st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
+    with col2:
+        # st.title("Content Creator Analytics")
+        st.header("Topics As Aspects - ROBERTA ABSA Sentiment Analysis")
+        # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("---")
     
     # Add progress indicator for initial data loading
     with st.spinner('Loading sentiment data...'):
