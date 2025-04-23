@@ -48,10 +48,10 @@ def show_spam_summary(selected_creator=None):
         if len(df_filtered) == 0:
             st.warning(f"No data found for: {selected_creator}")
             return
-        st.header(f"Analysis for ⭐{selected_creator}⭐")
+        st.subheader(f"Analysis for ⭐{selected_creator}⭐")
     else:
         df_filtered = df
-        st.header("Overall Analysis")
+        st.subheader("Overall Analysis")
     
     # Create columns for metrics
     col1, col2, col3 = st.columns(3)
