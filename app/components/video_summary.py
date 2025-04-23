@@ -20,10 +20,12 @@ def show_video_summary():
     try:
         # Load data
         df = pd.read_csv("data/comment_sentiment_roberta_and_vader.csv")
-        
+
+        st.subheader("Preview of the sentiment data")
+        st.dataframe(df)
         # Show data preview in an expandable section
-        with st.expander("Preview of the sentiment data"):
-            st.dataframe(df.head(10))
+        # with st.expander("Preview of the sentiment data"):
+        #     st.dataframe(df.head(10))
         
         # Create two columns for the first set of charts
         col1, col2 = st.columns(2)
