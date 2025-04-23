@@ -14,7 +14,7 @@ from app.components.topics_vader_sentiment_analysis import show_vader_sentiment_
 from app.components.tdidf_bart_sentiment_analysis import show_tdidf_bart_sentiment_analysis
 
 def show_business_page():
-    st.title("Business Intelligence Dashboard")
+    # st.title("Business Intelligence Dashboard")
     
     # 加载示例数据
     @st.cache_data
@@ -79,11 +79,12 @@ def show_business_page():
     data = load_business_data()
     
     # 创建侧边栏过滤器
-    st.sidebar.subheader("Business Intelligence")
+    st.sidebar.markdown("---")
+    # st.sidebar.subheader("Business Intelligence")
     
     # 创作者选择
     selected_creators = st.sidebar.multiselect(
-        "Select Creators",
+        "Select Analysis Type",
         options=data["videos"]["creator"].unique(),
         default=data["videos"]["creator"].unique()[:2]
     )
@@ -97,7 +98,7 @@ def show_business_page():
     # 分析类型选择
     analysis_type = st.sidebar.radio(
         "Select Analysis",
-        ["Creator Comparison","Sentiment Summary","Topic Analysis","Entity Analysis", "Video Summary","Topics As Aspects - VADER Sentiment Analysis","Topics As Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - VADER Sentiment Analysis","TD-IDF Extracted Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - BART ABSA Sentiment Analysis"]
+        ["Video Summary","Analysis Comparison","Sentiment Analysis","Topic Analysis","Entity Analysis", "Topics As Aspects - VADER Sentiment Analysis","Topics As Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - VADER Sentiment Analysis","TD-IDF Extracted Aspects - ROBERTA ABSA Sentiment Analysis","TD-IDF Extracted Aspects - BART ABSA Sentiment Analysis"]
     )
     
     # 过滤数据
@@ -110,9 +111,9 @@ def show_business_page():
     ]
     
     # 显示选定的分析
-    if analysis_type == "Creator Comparison":
+    if analysis_type == "Analysis Comparison":
         show_creator_comparison(filtered_videos)
-    elif analysis_type == "Sentiment Summary":
+    elif analysis_type == "Sentiment Analysis":
         show_sentiment_summary()
     elif analysis_type == "Video Summary":
         show_video_summary()
