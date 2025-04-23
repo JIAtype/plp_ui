@@ -42,7 +42,7 @@ def set_custom_styles():
 def main():
     # 设置页面配置
     st.set_page_config(
-        page_title="INSIGHTX Comments Analysis",
+        page_title="INSIGHTX",
         page_icon="📊",
         layout="wide",
         initial_sidebar_state="expanded"
