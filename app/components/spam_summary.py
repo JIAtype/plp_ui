@@ -68,7 +68,7 @@ def show_spam_summary(selected_creator=None):
         st.metric("Spam Percentage", f"{creator_spam_percentage:.1f}%")
     
     # Visualizations section
-    st.subheader("Visualizations")
+    # st.subheader("Visualizations")
     
     # Tab layout for different visualizations
     tab1, tab2, tab3 = st.tabs(["Spam Distribution", "Time Analysis", "Comment Samples"])
