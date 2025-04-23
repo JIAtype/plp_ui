@@ -31,7 +31,7 @@ def show_creator_comparison():
         analysis_type_2 = st.selectbox(
             "Select Second Analysis Type",
             options=analysis_types,
-            index=0, 
+            index=1, 
             key="analysis_2"
         )
     
