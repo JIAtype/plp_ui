@@ -150,10 +150,16 @@ def show_roberta_sentiment_analysis():
             ),
             unsafe_allow_html=True
         )
+        # view_option = st.radio(
+        #     "Select View:",
+        #     ('Absolute Numbers', 'Percentages'),
+        #     horizontal=True
+        # )
         view_option = st.radio(
-            "Select View:",
-            ('Absolute Numbers', 'Percentages'),
-            horizontal=True
+            "Select view option",
+            options=["Absolute Numbers", "Percentages"],  # Your options here
+            horizontal=True，
+            key="roberta_sentiment_view_option"  # Add a unique key
         )
         percentage_data = sentiment_counts_vader.copy()
         for col in percentage_data.columns:
