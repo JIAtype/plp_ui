@@ -705,7 +705,7 @@ def show_vader_sentiment_analysis():
         )
 
         # Video search functionality
-        # video_search = st.text_input("Search for specific video ID (optional):")
+        video_search = None
         
         # Filter the dataframe based on creator and search
         creator_data = aspect_video_df[aspect_video_df["channel"] == selected_creator]
