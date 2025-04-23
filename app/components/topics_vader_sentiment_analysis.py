@@ -685,8 +685,7 @@ def show_vader_sentiment_analysis():
                 bgcolor="white",
                 font_size=12,
                 font_family="Arial"
-            ),
-            yaxis=dict(automargin=True)
+            )
         )
         
         # Improve hover information
