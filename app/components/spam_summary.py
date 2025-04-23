@@ -15,8 +15,16 @@ def show_spam_summary(selected_creator=None):
     selected_creator : str, optional
         If provided, analysis will focus on this specific content creator
     """
-    st.title("YouTube Comments Spam Analysis")
-    
+    # st.title("YouTube Comments Spam Analysis")
+    col1, col2 = st.columns([2, 8])
+    with col1:
+        st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
+    with col2:
+        # st.title("Content Creator Analytics")
+        st.header("Comments Spam Analysis")
+        # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("---")
+
     # Load data
     try:
         df = pd.read_csv('data/comments_analysis_v4.csv')
@@ -38,9 +46,9 @@ def show_spam_summary(selected_creator=None):
     if selected_creator:
         df_filtered = df[df['Content Creator'] == selected_creator]
         if len(df_filtered) == 0:
-            st.warning(f"No data found for creator: {selected_creator}")
+            st.warning(f"No data found for: {selected_creator}")
             return
-        st.header(f"Analysis for: {selected_creator}")
+        st.header(f"Analysis for ⭐{selected_creator}⭐")
     else:
         df_filtered = df
         st.header("Overall Analysis")
