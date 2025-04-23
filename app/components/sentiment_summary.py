@@ -9,7 +9,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 def show_sentiment_summary():
-    st.header("Video-Level Summary")
+    # st.header("Video-Level Summary")
+    col1, col2 = st.columns([2, 8])
+    with col1:
+        st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
+    with col2:
+        # st.title("Content Creator Analytics")
+        st.header("Video-Level Sentiment Summary")
+        # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("---")
     
     try:
         df = pd.read_csv('data/video_sentiment_summary.csv')
