@@ -83,7 +83,7 @@ def show_entity_analysis():
         xaxis_tickangle=-45,
         height=500,
         xaxis_title="Entity",
-        yaxis_title="Average Sentiment Score (-1 to 1)",
+        yaxis_title="Average Sentiment Score (0 to 1)",
         legend_title="Entity Type"
     )
     
@@ -191,7 +191,7 @@ def show_entity_analysis():
             annot=True, 
             fmt=".2f", 
             linewidths=0.5,
-            vmin=-1, 
+            vmin=0, 
             vmax=1,
             center=0,
             ax=ax
@@ -215,8 +215,8 @@ def show_entity_analysis():
     
     if wordcloud_style == "Intuitive positive emotion word cloud":
         # 使用与PLP2相同的实现
-        st.write("Word Cloud of Positive Entities (Sentiment > 0.2)")
-        positive_entities = df_entity_summary[df_entity_summary["Avg_Sentiment"] > 0.2]
+        st.write("Word Cloud of Positive Entities (Sentiment > 0.6)")
+        positive_entities = df_entity_summary[df_entity_summary["Avg_Sentiment"] > 0.6]
         
         if len(positive_entities) > 0:
             # 简单合并实体名称 - 确保所有实体都是字符串类型
@@ -244,8 +244,8 @@ def show_entity_analysis():
         cloud_col1, cloud_col2, cloud_col3 = st.columns(3)
         
         with cloud_col1:
-            st.write("Positive Entities (Sentiment > 0.2)")
-            positive_entities = df_entity_summary[df_entity_summary["Avg_Sentiment"] > 0.2]
+            st.write("Positive Entities (Sentiment > 0.6)")
+            positive_entities = df_entity_summary[df_entity_summary["Avg_Sentiment"] > 0.6]
             
             if len(positive_entities) > 0:
                 # 创建频率字典
@@ -280,9 +280,9 @@ def show_entity_analysis():
                 st.write("No positive entities found.")
         
         with cloud_col2:
-            st.write("Neutral Entities (-0.2 ≤ Sentiment ≤ 0.2)")
-            neutral_entities = df_entity_summary[(df_entity_summary["Avg_Sentiment"] >= -0.2) & 
-                                            (df_entity_summary["Avg_Sentiment"] <= 0.2)]
+            st.write("Neutral Entities (0.4 ≤ Sentiment ≤ 0.6)")
+            neutral_entities = df_entity_summary[(df_entity_summary["Avg_Sentiment"] >= 0.4) & 
+                                            (df_entity_summary["Avg_Sentiment"] <= 0.6)]
             
             if len(neutral_entities) > 0:
                 # 创建频率字典
@@ -314,8 +314,8 @@ def show_entity_analysis():
                 st.write("No neutral entities found.")
         
         with cloud_col3:
-            st.write("Negative Entities (Sentiment < -0.2)")
-            negative_entities = df_entity_summary[df_entity_summary["Avg_Sentiment"] < -0.2]
+            st.write("Negative Entities (Sentiment < 0.4)")
+            negative_entities = df_entity_summary[df_entity_summary["Avg_Sentiment"] < 0.4]
             
             if len(negative_entities) > 0:
                 # 创建频率字典
