@@ -57,7 +57,7 @@ def main():
     
     # 侧边栏导航
     with st.sidebar:
-        st.markdown("<h1>INSIGHTX  Video Comments Analysis</h1>", unsafe_allow_html=True)
+        st.markdown("<h1>INSIGHTX</h1>", unsafe_allow_html=True)
         st.markdown("### Video Comments Analysis")
         st.markdown("---")
         
