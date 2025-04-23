@@ -8,15 +8,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def show_video_summary():
-    st.header("Video-Level Summary")
-    
-    st.subheader("Overview")
-    st.write("This section visualizes sentiment analysis across different content creators based on comments data.")
-
-    # st.set_page_config(layout="wide", page_title="Comment Sentiment Analysis")
-
-    st.title("YouTube Comment Sentiment Analysis")
-    st.write("Analysis of sentiment across different YouTube channels using VADER and RoBERTa models")
+    col1, col2 = st.columns([2, 8])
+    with col1:
+        st.image("https://img.icons8.com/color/96/000000/youtube-play.png", width=80)
+    with col2:
+        # st.title("Content Creator Analytics")
+        st.header("Video-Level Summary")
+        # st.markdown("<h1 class='main-header'>Video Comments Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("---")
 
     try:
         # Load data
