@@ -180,17 +180,17 @@ def show_spam_analysis():
         st.markdown(f"**Normal comments:** {st.session_state.not_spam_count}")
         
         # Only show pie chart if we have data
-        if st.session_state.total_tested > 0:
-            fig, ax = plt.subplots(figsize=(3, 3))
-            labels = ['Spam', 'Normal']
-            sizes = [st.session_state.spam_count, st.session_state.not_spam_count]
-            colors = ['#ff9999', '#66b3ff']
-            explode = (0.1, 0)
+        # if st.session_state.total_tested > 0:
+        #     fig, ax = plt.subplots(figsize=(3, 3))
+        #     labels = ['Spam', 'Normal']
+        #     sizes = [st.session_state.spam_count, st.session_state.not_spam_count]
+        #     colors = ['#ff9999', '#66b3ff']
+        #     explode = (0.1, 0)
             
-            ax.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%',
-                   shadow=True, startangle=90)
-            ax.axis('equal')
-            st.pyplot(fig)
+        #     ax.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%',
+        #            shadow=True, startangle=90)
+        #     ax.axis('equal')
+        #     st.pyplot(fig)
         st.markdown('</div>', unsafe_allow_html=True)
         
     # Handle clear button
