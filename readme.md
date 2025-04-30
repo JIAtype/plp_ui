@@ -1,5 +1,7 @@
 # Content Analysis Dashboard
 
+https://plpuigit-250420.streamlit.app/
+
 这是一个基于Streamlit的交互式用户界面，为内容创作者和企业提供定制化的分析结果展示。该应用程序允许用户浏览和分析视频评论、情感和主题数据，以获取有价值的洞察。
 
 ## 功能
