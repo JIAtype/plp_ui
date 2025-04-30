@@ -1,26 +1,32 @@
-# Content Analysis Dashboard
+# Content Analysis
 
 https://plpuigit-250420.streamlit.app/
 
-这是一个基于Streamlit的交互式用户界面，为内容创作者和企业提供定制化的分析结果展示。该应用程序允许用户浏览和分析视频评论、情感和主题数据，以获取有价值的洞察。
+This is an interactive user interface based on Streamlit that provides customized analysis results display for content creators and businesses. The application allows users to browse and analyze video comments, sentiment and topic data to gain valuable insights.
 
-## 功能
+## Features
 
-### 内容创作者模块
+### Content Creator Module
 
-- **视频级别分析**：展示每个视频的评论数和主题数，并利用颜色梯度直观地突出高互动和高主题的视频
-- **创作者汇总**：展示每个创作者的总体情感百分比和评论总数
-- **积极情感主题分析**：按积极情感百分比排序主题，展示每个主题的情感分布
-- **实体情感分析**：展示评论中出现的实体及其情感得分
+- **Video Level Analysis**: Displays the number of comments and topics for each video, and uses color gradients to visually highlight videos with high interactions and topics
 
-### 商业用途模块
+- **Creator Summary**: Displays the overall sentiment percentage and total number of comments for each creator
 
-- **创作者比较概览**：比较多个创作者的关键指标
-- **情感分析方法选择**：展示不同情感分析方法的结果
-- **基于主题/方面的分析**：展示各创作者不同主题/方面的情感分析
-- **时间序列趋势**：展示情感随时间的变化趋势
+- **Positive Sentiment Topic Analysis**: Sorts topics by positive sentiment percentage and displays the sentiment distribution of each topic
 
-## 项目结构
+- **Entity Sentiment Analysis**: Displays entities appearing in comments and their sentiment scores
+
+### Commercial Use Module
+
+- **Creator Comparison Overview**: Compares key metrics of multiple creators
+
+- **Sentiment Analysis Method Selection**: Displays the results of different sentiment analysis methods
+
+- **Theme/Aspect-Based Analysis**: Displays sentiment analysis of different themes/aspects for each creator
+
+- **Time Series Trend**: Displays the trend of sentiment changes over time
+
+## Project Structure
 
 ```
 plp_ui/
@@ -45,21 +51,21 @@ plp_ui/
 └── README.md                 # 项目说明
 ```
 
-## 安装与运行
+## Installation and Running
 
-1. 安装依赖项:
+1. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-2. 运行应用程序:
+2. Run the application:
 
 ```bash
 streamlit run app.py
 ```
 
-## 系统要求
+## System Requirements
 
 - Python 3.8+
-- 安装requirements.txt中列出的所有包
+- Install all packages listed in requirements.txt
