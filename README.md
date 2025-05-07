@@ -1,6 +1,4 @@
-<div align="central">
-  🌐 [English](README.md) | [简体中文](README.zh-CN.md)
-</div>
+[English](README.md) | [简体中文](README.zh-CN.md)
 
 # Content Analysis
 
