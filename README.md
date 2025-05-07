@@ -1,6 +1,6 @@
-[English](README.md) | [简体中文](README.zh-CN.md)
+<p align="right">[English](README.md) | [简体中文](README.zh-CN.md)</p>
 
-# Content Analysis
+# Content Analysis  
 
 https://plpuigit-250420.streamlit.app/
 
